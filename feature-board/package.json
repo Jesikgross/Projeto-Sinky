@@ -1,0 +1,45 @@
+{
+  "name": "feature-board",
+  "version": "1.0.0",
+  "description": "Uma API simples construída com NestJS para gerenciar ideias de produtos. Os usuários podem visualizar uma lista de ideias e votar nas suas favoritas.",
+  "main": "index.js",
+  "scripts": {
+    "build:next": "next build",
+    "build:nest": "tsc -p tsconfig.nest.json",
+    "dev:nest": "ts-node-dev -r tsconfig-paths/register --project tsconfig.nest.json src/main.ts",
+    "dev:next": "next dev -p 3001",
+    "dev": "concurrently \"npm run dev:nest\" \"npm run dev:next\"",
+    "start": "npm run dev",
+    "seed": "ts-node --transpile-only src/database/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^11.1.3",
+    "@nestjs/core": "^11.1.3",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.1.3",
+    "@nestjs/typeorm": "^11.0.0",
+    "axios": "^1.6.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "concurrently": "^8.2.2",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "swr": "^2.2.4",
+    "typeorm": "^0.3.24"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  }
+}
