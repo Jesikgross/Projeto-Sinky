@@ -1,4 +1,4 @@
-# Arquitetura do Feature Board
+# Arquitetura do Modulo de Ideias
 
 ## Back-end
 A validação e proteção das rotas foi implementada usando:
