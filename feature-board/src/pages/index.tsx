@@ -23,7 +23,7 @@ export default function Home({ initialIdeas }: { initialIdeas: Idea[] }) {
     return (
       <div className="min-h-screen bg-gray-100 py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-gray-800 mb-8">Feature Board</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">Mural de ideias</h1>
           <p className="text-gray-600">Nenhuma ideia cadastrada ainda.</p>
         </div>
       </div>

@@ -57,7 +57,7 @@ feature-board/
 
 ## Autor
 
-[Seu Nome]
+Jessica Gross
 
 ## Licença
 
