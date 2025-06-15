@@ -50,57 +50,114 @@ export default function Home({ initialIdeas }: { initialIdeas: Idea[] }) {
     }
   };
 
+  const cardColors = [
+    'border-blue-400',
+    'border-purple-400',
+    'border-pink-400',
+    'border-green-400',
+    'border-yellow-400',
+    'border-red-400'
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
-      <div className="container mx-auto px-4">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Mural de Ideias</h1>
-          <p className="text-lg text-gray-600">Vote nas melhores ideias para nosso produto</p>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Cabeçalho */}
+        <header className="text-center mb-14">
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+            Mural de Ideias
+          </h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Vote nas melhores ideias para nosso produto 🚀
+          </p>
         </header>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {Array.isArray(ideas) && ideas.map((idea) => (
-            <div key={idea.id} 
-                 className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-100">
-              <div className="flex justify-between items-start mb-4">
-                <h2 className="text-xl font-semibold text-gray-800">{idea.title}</h2>
-                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                  {idea.votes} votos
-                </span>
-              </div>
-              <p className="text-gray-600 mb-6 min-h-[60px]">{idea.description}</p>
-              <div className="flex justify-end">
+        {/* Grid de Ideias */}
+        <div className="flex flex-wrap gap-6 justify-center mb-16">
+          {Array.isArray(ideas) &&
+            ideas.map((idea, index) => (
+              <div
+                key={idea.id}
+                className={`
+                  flex flex-col w-96
+                  border-4 ${cardColors[index % cardColors.length]}
+                  rounded-2xl bg-white shadow-lg
+                  hover:shadow-xl hover:scale-105
+                  transition-all duration-300 p-6
+                `}
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <h2 className="text-2xl font-bold text-gray-800">{idea.title}</h2>
+                  <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-bold">
+                    {idea.votes} votos
+                  </span>
+                </div>
+                <p className="text-gray-600 text-lg mb-6 flex-grow">
+                  {idea.description}
+                </p>
                 <button
                   onClick={() => handleVote(idea.id)}
                   disabled={votingId === idea.id}
                   className={`
-                    ${votingId === idea.id 
-                      ? 'bg-blue-300 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-700 hover:scale-105'
-                    } 
+                    w-full mt-4
+                    ${votingId === idea.id
+                      ? "bg-gray-400"
+                      : "bg-blue-600 hover:bg-blue-700"
+                    }
+                    text-white text-lg font-bold
+                    px-6 py-3 rounded-xl
                     transform transition-all duration-200
-                    text-white px-6 py-2 rounded-lg font-medium
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                    ${!votingId && "hover:scale-105"}
                   `}
                 >
-                  {votingId === idea.id ? 
-                    <span className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Votando...
-                    </span>
-                    : 'Votar'
-                  }
+                  {votingId === idea.id ? "Votando..." : "Votar"}
                 </button>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
+
+        {/* Ranking */}
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-8">🏆 Ranking</h2>
+          <div className="space-y-3">
+            {[...ideas]
+              .sort((a, b) => b.votes - a.votes)
+              .map((idea, index) => (
+                <div
+                  key={idea.id}
+                  className={`
+                    flex items-center gap-4 p-4 rounded-xl
+                    ${index === 0 ? 'bg-yellow-100 border-2 border-yellow-400' :
+                      index === 1 ? 'bg-gray-100 border-2 border-gray-400' :
+                      index === 2 ? 'bg-orange-100 border-2 border-orange-400' :
+                      'bg-white border border-gray-200'
+                    }
+                    hover:shadow-md transition-shadow
+                  `}
+                >
+                  <div className={`
+                    w-10 h-10 rounded-full flex items-center justify-center font-bold text-white
+                    ${index === 0 ? 'bg-yellow-500' :
+                      index === 1 ? 'bg-gray-500' :
+                      index === 2 ? 'bg-orange-500' :
+                      'bg-blue-500'
+                    }
+                  `}>
+                    {index + 1}
+                  </div>
+                  <span className="font-semibold flex-grow">{idea.title}</span>
+                  <span className="bg-white px-4 py-2 rounded-full font-bold text-blue-800">
+                    {idea.votes} votos
+                  </span>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
   );
+  
+  
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
