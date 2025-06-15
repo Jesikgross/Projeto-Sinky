@@ -135,20 +135,22 @@ export default function Home({ initialIdeas }: { initialIdeas: Idea[] }) {
                     hover:shadow-md transition-shadow
                   `}
                 >
-                  <div className={`
-                    w-10 h-10 rounded-full flex items-center justify-center font-bold text-white
-                    ${index === 0 ? 'bg-yellow-500' :
-                      index === 1 ? 'bg-gray-500' :
-                      index === 2 ? 'bg-orange-500' :
-                      'bg-blue-500'
-                    }
-                  `}>
-                    {index + 1}
+                  <div className="flex items-center gap-3 flex-grow">
+                    <span className={`
+                      text-xl font-bold
+                      ${index === 0 ? 'text-yellow-500' :
+                        index === 1 ? 'text-gray-500' :
+                        index === 2 ? 'text-orange-500' :
+                        'text-blue-500'
+                      }
+                    `}>
+                      {index + 1}°
+                    </span>
+                    <span className="font-bold text-lg">{idea.title}:</span>
+                    <span className="text-gray-600 ml-2">
+                      {idea.votes} {idea.votes === 1 ? 'voto' : 'votos'}
+                    </span>
                   </div>
-                  <span className="font-semibold flex-grow">{idea.title}</span>
-                  <span className="bg-white px-4 py-2 rounded-full font-bold text-blue-800">
-                    {idea.votes} votos
-                  </span>
                 </div>
               ))}
           </div>
